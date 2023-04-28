@@ -24,7 +24,7 @@ def generate_score(text):
 def generate_title(text):
     prompt = title_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-jumbo-instruct",
+        model="j2-grande-instruct",
         prompt=prompt,
         temperature=0.3,
         minTokens=1,
@@ -39,7 +39,7 @@ def generate_title(text):
 def generate_description(text):
     prompt = description_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-jumbo-instruct",
+        model="j2-grande-instruct",
         prompt=prompt,
         temperature=0.3,
         minTokens=1,
@@ -54,7 +54,7 @@ def generate_description(text):
 def generate_tags(text):
     prompt = tags_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-jumbo-instruct",
+        model="j2-grande-instruct",
         prompt=prompt,
         temperature=0.3,
         minTokens=1,
@@ -74,7 +74,7 @@ def generate_seo_data(inp):
     # Generate keywords
     prompt = keywords_prompt.format(description=inp)
     response = ai21.Completion.execute(
-        model="j2-jumbo-instruct",
+        model="j2-grande-instruct",
         prompt=prompt,
         temperature=0.3,
         minTokens=1,
@@ -82,7 +82,7 @@ def generate_seo_data(inp):
         numResults=1,
     )
 
-    # Generate data
+    # Generate responses
     seo_title = generate_title(inp)
     seo_description = generate_description(inp)
     seo_tags = generate_tags(inp)
@@ -90,35 +90,39 @@ def generate_seo_data(inp):
     # return the data
     st.session_state["output"] = response.completions[0].data.text, score, seo_title, seo_description , seo_tags
 
-  # create Streamli App
-st.image("https://github.com/Juancorreaph/parseo/blob/5a90601d83917f145640c96c7dcfc2842349a8e7/logo-parseo-white.png")
+
+st.image("/Users/juancorrea/Desktop/Hackaton_app_final/logo-parseo-white.png")
 st.title("Welcome to parseo, parce!")
 st.write("Elevate your content with our all-in-one AI solution, designed to streamline your workflow and help you create content that stands out!")
 st.divider()
 # Add file upload option
-uploaded_file = st.file_uploader("Upload a text document", type=["txt"])
+uploaded_file = st.file_uploader("Upload a text document", type=["txt", "docx"])
 if uploaded_file is not None:
         # Read the contents of the file
         file_contents = uploaded_file.read()
+        # Detect the character encoding of the file
         encoding = chardet.detect(file_contents)['encoding']
+        # If the detected encoding is None, use utf-8 as the default encoding
         encoding = encoding or 'utf-8'
         try:
+            # Decode the file contents using the detected encoding
             file_contents = file_contents.decode(encoding, errors='strict')
         except UnicodeDecodeError:
+            # If decoding fails, try again using 'replace' as the error handler
             file_contents = file_contents.decode(encoding, errors='replace')
         st.text(file_contents)
         generate_seo_data(file_contents)
         
         # check if file_contents is defined before using it
         if 'file_contents' in locals():
+            # do something with file_contents
             encoding = chardet.detect(file_contents.encode())['encoding']
-            
-  # Add text paste option        
+        
 st.divider()
 inp = st.text_area("Or enter your text here")
 st.button("Generate my SEO parce!", on_click=lambda: generate_seo_data(inp))
 
-  # Add columns output
+
 if st.session_state.output:
     col1, col2, col3 = st.columns(3 , gap="medium")
     with col1:
@@ -140,12 +144,12 @@ if st.session_state.output:
     with col1:
         st.header("Meta Description")
         if st.session_state.output and len(st.session_state.output) >= 4:
-            st.write(st.session_state.output[4])
+            st.write(st.session_state.output[3])
         else:
             st.write("No SEO description generated.")
     with col2:
         st.header("Tags")
         if st.session_state.output and len(st.session_state.output) >= 4:
-            st.write(st.session_state.output[3])
+            st.write(st.session_state.output[4])
         else:
             st.write("No SEO description generated.")
