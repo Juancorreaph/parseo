@@ -91,7 +91,7 @@ def generate_seo_data(inp):
     st.session_state["output"] = response.completions[0].data.text, score, seo_title, seo_description , seo_tags
 
 
-st.image("https://github.com/Juancorreaph/parseo/blob/93b0b40aad58beccf68f853fdf51654f23189810/logo-parseo-white.png")
+st.image("/parseo/logo-parseo-white.png")
 st.title("Welcome to parseo, parce!")
 st.write("Elevate your content with our all-in-one AI solution, designed to streamline your workflow and help you create content that stands out!")
 st.divider()
@@ -138,7 +138,7 @@ if st.session_state.output:
     st.header("Flesh Kincaid Grade")
     st.write("The Flesch-Kincaid grade is a readability formula that calculates the grade level needed to understand a piece of text based on its average sentence length and syllable count.")
     st.subheader(f"Grade Level: {st.session_state.output[1]}")
-    st.image("https://github.com/Juancorreaph/parseo/blob/main/score%20table.png")
+    st.image("/parseo/score table.png")
 
 
     st.divider()   
