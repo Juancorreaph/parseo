@@ -91,7 +91,7 @@ def generate_seo_data(inp):
     st.session_state["output"] = response.completions[0].data.text, score, seo_title, seo_description , seo_tags
 
 
-st.image("/Users/juancorrea/Desktop/Hackaton_app_final/logo-parseo-white.png")
+st.image("https://github.com/Juancorreaph/parseo/blob/5a27359264166e486aa825e0624d44fc57db5081/logo-parseo-white.png")
 st.title("Welcome to parseo, parce!")
 st.write("Elevate your content with our all-in-one AI solution, designed to streamline your workflow and help you create content that stands out!")
 st.divider()
