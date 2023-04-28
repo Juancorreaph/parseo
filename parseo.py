@@ -6,10 +6,10 @@ import pandas as pd
 
 ai21.api_key = "f25QoeZfixey11leRFNFBNTlKwwcRdZW"
 
-keywords_prompt = "Based on the input or uploaded text generate the important SEO keywords that can be used to optimize the content for search engines \nKeywords: {description}\n"
-title_prompt = "Based on the input or uploaded text generate a meta title that accurately represents the content of the text. The meta title should be optimized for search engines and be concise yet descriptive. The generated meta title should adhere to best practices for SEO and provide meaningful information about the content of the text.\n{description}\n"
-description_prompt = "Based on the input or uploaded text generate a concise and compelling Meta Description that accurately summarizes the content of the text. The Meta Description should be limited to a maximum of 155-160 characters and should contain relevant keywords and phrases to optimize search engine results. The generated Meta Description should effectively convey the purpose and value of the text to potential readers.:\n{description}\n"
-tags_prompt = "Given the input text, generate a list of relevant SEO tags to improve the visibility of the content on search engines. Consider the keywords, phrases, and entities present in the text to generate the tags. The output should be a list of words or phrases that could be used as tags for the content.:\n{description}\n"
+keywords_prompt = "Read and understand the input or uploaded text and generate the important SEO keywords that can be used to optimize the content for search engines \nKeywords: {description}\n"
+title_prompt = "Read and understand the input or uploaded text and generate a meta title that accurately represents the content of the text. The meta title should be optimized for search engines and be concise yet descriptive. The generated meta title should adhere to best practices for SEO and provide meaningful information about the content of the text.\n{description}\n"
+description_prompt = "Read and understand the input or uploaded text and generate a concise and compelling Meta Description that accurately summarizes the content of the text. The Meta Description should be limited to a maximum of 155-160 characters and should contain relevant keywords and phrases to optimize search engine results. The generated Meta Description should effectively convey the purpose and value of the text to potential readers.:\n{description}\n"
+tags_prompt = "Read and understand the input or uploaded text and generate the list of relevant SEO tags to improve the visibility of the content on search engines. Consider the keywords, phrases, and entities present in the text to generate the tags. The output should be a list of words or phrases that could be used as tags for the content.:\n{description}\n"
 
 # Initialization of the output variable
 if "output" not in st.session_state:
@@ -24,7 +24,7 @@ def generate_score(text):
 def generate_title(text):
     prompt = title_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-grande-instruct",
+        model="j2-jumbo-instruct",
         prompt=prompt,
         temperature=0.5,
         minTokens=1,
@@ -39,7 +39,7 @@ def generate_title(text):
 def generate_description(text):
     prompt = description_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-grande-instruct",
+        model="j2-jumbo-instruct",
         prompt=prompt,
         temperature=0.5,
         minTokens=1,
@@ -54,7 +54,7 @@ def generate_description(text):
 def generate_tags(text):
     prompt = tags_prompt.format(description=text)
     response = ai21.Completion.execute(
-        model="j2-grande-instruct",
+        model="j2-jumbo-instruct",
         prompt=prompt,
         temperature=0.5,
         minTokens=1,
@@ -74,7 +74,7 @@ def generate_seo_data(inp):
     # Generate keywords
     prompt = keywords_prompt.format(description=inp)
     response = ai21.Completion.execute(
-        model="j2-grande-instruct",
+        model="j2-jumbo-instruct",
         prompt=prompt,
         temperature=0.5,
         minTokens=1,
