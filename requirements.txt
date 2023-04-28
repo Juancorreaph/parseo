@@ -1,1 +1,4 @@
 ai21
+textstat
+chardet
+pandas
