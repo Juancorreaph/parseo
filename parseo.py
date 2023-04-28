@@ -26,7 +26,7 @@ def generate_title(text):
     response = ai21.Completion.execute(
         model="j2-grande-instruct",
         prompt=prompt,
-        temperature=0.3,
+        temperature=0.5,
         minTokens=1,
         maxTokens=40,
         numResults=1,
@@ -41,7 +41,7 @@ def generate_description(text):
     response = ai21.Completion.execute(
         model="j2-grande-instruct",
         prompt=prompt,
-        temperature=0.3,
+        temperature=0.5,
         minTokens=1,
         maxTokens=200,
         numResults=1,
@@ -56,7 +56,7 @@ def generate_tags(text):
     response = ai21.Completion.execute(
         model="j2-grande-instruct",
         prompt=prompt,
-        temperature=0.3,
+        temperature=0.5,
         minTokens=1,
         maxTokens=100,
         numResults=1,
@@ -76,7 +76,7 @@ def generate_seo_data(inp):
     response = ai21.Completion.execute(
         model="j2-grande-instruct",
         prompt=prompt,
-        temperature=0.3,
+        temperature=0.5,
         minTokens=1,
         maxTokens=100,
         numResults=1,
